@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @SpringBootApplication
 public class Application {
 
@@ -14,12 +15,14 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+    /**
+     * Add basic controller
+     */
     @RestController
     static class SimpleRestController {
         @GetMapping("/")
         String sayHello(@AuthenticationPrincipal OidcUser oidcUser) {
-            return "Hello: " + oidcUser.getFullName();
+            return "Hello" + (oidcUser != null ? oidcUser.getFullName() : "anonymous");
         }
     }
-
 }
